@@ -299,7 +299,6 @@ const Mission3 = (NewDeployment, militaryUnit) =>{
     militaryUnit.currentDeployment = NewDeployment;
     return militaryUnit
 }; 
-// console.log(militaryUnit)
 
 // Example
 const newDeployment = {
@@ -307,20 +306,39 @@ const newDeployment = {
     mission: "NATO Peacekeeping Operations",
     startDate: "2025-01-01",
     estimatedEndDate: "2025-12-31",
-  };
+};
+//   בדיקה
+// console.log(Mission3(newDeployment, militaryUnit));
   
-  console.log(Mission3(newDeployment, militaryUnit));
-  
-
 // 4
 const Mission4 = (FirearmObject, militaryUnit) =>{
+    const existFirearm = militaryUnit.equipment.firearms.find(
+        (f) => f.type === FirearmObject.type && f.status === FirearmObject.status
+    );
+    if(existFirearm){
+        existFirearm.quantity += FirearmObject.quantity; 
+    }
+    else{
+        militaryUnit.equipment.firearms.push(FirearmObject)
+    }
+    return militaryUnit
+};
 
+// 5
+const Mission5 = (militaryUnit) =>{
+    const TotalDuration = militaryUnit.trainingPrograms.reduce(
+        (sum, program) => sum + program.duration,
+        0
+    );
+    return `${totalDuration}`;
+}
+
+module.exports = {
+    Mission1,
+    Mission2,
+    Mission3,
+    Mission4,
+    Mission5
 }
 
 
-
-
-
-
-
-  
